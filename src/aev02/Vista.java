@@ -27,6 +27,7 @@ public class Vista {
 	JComboBox comboBox;
 	JButton btnExecute;
 	JScrollPane scrollPane;
+	JScrollPane scrollPane_1;
 	JTable table_1;
 
 	/**
@@ -105,7 +106,7 @@ public class Vista {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 
-		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(10, 298, 741, 166);
 		frmBaseDeDades.getContentPane().add(scrollPane_1);
 

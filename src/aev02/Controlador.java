@@ -19,6 +19,7 @@ public class Controlador {
 		this.vista = v;
 		this.model = m;
 		initEventHandlers();
+
 	}
 
 	/**
@@ -34,10 +35,16 @@ public class Controlador {
 
 	public void initEventHandlers() {
 		model.abrirConexion();
+		vista.scrollPane.hide();
+		vista.scrollPane_1.hide();
 
 		vista.btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				login = model.login(vista.usuario_Tf.getText(), vista.contrasenya_Tf.getText());
+				if (login) {
+					vista.scrollPane.show();
+					vista.scrollPane_1.show();
+				}
 			}
 		});
 
@@ -125,7 +132,7 @@ public class Controlador {
 				 * trobe.
 				 */
 				for (int i = 0; i < sp.length; i++) {
-					if (sp[i].equals("FROM") || sp[i].equals("from") || sp[i].equals("into") || sp[i].equals("INTO") ) {
+					if (sp[i].equals("FROM") || sp[i].equals("from") || sp[i].equals("into") || sp[i].equals("INTO")) {
 						tabla = sp[i + 1];
 						break;
 					}
@@ -142,9 +149,16 @@ public class Controlador {
 					}
 				} else if (login) {
 					try {
-						model.ejecutarConsulta(consulta);
-						DefaultTableModel modelo = model.rellenarTabla("SELECT * FROM " + tabla +";");
-						vista.table.setModel(modelo);
+						int reply = JOptionPane.showConfirmDialog(null,
+								"Aquesta acció farà canvis en la base de dades.\n" + "Vols continuar?",
+								"Confirmar acció", JOptionPane.YES_NO_OPTION);
+
+						if (reply == JOptionPane.YES_OPTION) {
+
+							model.ejecutarConsulta(consulta);
+							DefaultTableModel modelo = model.rellenarTabla("SELECT * FROM " + tabla + ";");
+							vista.table.setModel(modelo);
+						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
@@ -152,6 +166,7 @@ public class Controlador {
 					JOptionPane.showMessageDialog(null, "Tens que iniciar sessió per a realizar aquesta acció.");
 				}
 			}
+
 		});
 
 	}
