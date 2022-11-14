@@ -125,7 +125,7 @@ public class Controlador {
 				 * trobe.
 				 */
 				for (int i = 0; i < sp.length; i++) {
-					if (sp[i].equals("FROM") || sp[i].equals("from")) {
+					if (sp[i].equals("FROM") || sp[i].equals("from") || sp[i].equals("into") || sp[i].equals("INTO") ) {
 						tabla = sp[i + 1];
 						break;
 					}
@@ -143,10 +143,9 @@ public class Controlador {
 				} else if (login) {
 					try {
 						model.ejecutarConsulta(consulta);
-						DefaultTableModel modelo = model.rellenarTabla("SELECT * FROM " + tabla);
+						DefaultTableModel modelo = model.rellenarTabla("SELECT * FROM " + tabla +";");
 						vista.table.setModel(modelo);
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "Error al executar l'acció.");
 						e1.printStackTrace();
 					}
 				} else {
