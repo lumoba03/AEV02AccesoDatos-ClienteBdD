@@ -123,7 +123,7 @@ public class Controlador {
 				 * paraula la que indica el tipus de consulta, así que es pren en una variable.
 				 */
 				String[] sp = consulta.split(" ");
-				String tipoAccion = sp[0];
+				String tipoAccion = sp[0].toUpperCase();
 				String tabla = sp[1];
 				/*
 				 * Normalment és després d'un "From" quan s'especifica la taula a la qual es vol
